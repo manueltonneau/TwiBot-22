@@ -57,9 +57,11 @@ def main(argv):
 if __name__ == '__main__':
     start = time.time()
     dataset_name = main(sys.argv)
-    if not os.path.exists('./{}'.format(dataset_name)):
-        os.mkdir('./{}'.format(dataset_name))
-    filepath = '{}/user_feature.csv'.format(dataset_name)
+    data_path = '/scratch/mt4493/bot_detection/data'
+    code_path = '/scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela'
+    if not os.path.exists(os.path.join(code_path, '{}'.format(dataset_name))):
+        os.mkdir(os.path.join(code_path, '{}'.format(dataset_name)))
+    filepath = os.path.join(code_path,"{}/user_feature.csv".format(dataset_name))
     
     the_header = ["id","profile_description", "profile_location", "profile_url", "verified",
                   "bot_word_in_name", "bot_word_in_screen_name", "bot_word_in_description",
@@ -73,9 +75,9 @@ if __name__ == '__main__':
         writer.writerow(the_header)
 
     if dataset_name == 'Twibot-22':
-        json_path = './datasets/Twibot-22/user.json'
+        json_path = os.path.join(data_path,'Twibot-22/user.json')
     else:
-        json_path = './datasets/{}/node.json'.format(dataset_name)
+        json_path = os.path.join(data_path,'{}/node.json'.format(dataset_name))
 
     with open(json_path) as f:
         obj = ijson.items(f, 'item')
@@ -94,12 +96,12 @@ if __name__ == '__main__':
     print(time.time()-start)
     
     user_f = pd.read_csv(filepath)
-    if os.path.exists("{}/user_to_post.csv".format(dataset_name)):
-        up = pd.read_csv("{}/user_to_post.csv".format(dataset_name))
+    if os.path.exists(os.path.join(code_path,"{}/user_to_post.csv".format(dataset_name))):
+        up = pd.read_csv(os.path.join(code_path,"{}/user_to_post.csv".format(dataset_name)))
         user_final = list(up['id'])  # user list with label
         user_f = user_f[user_f['id'].isin(user_final)]  # Filter users with label
     else:
-        labels = pd.read_csv("./datasets/{}/label.csv".format(dataset_name))
+        labels = pd.read_csv(os.path.join(data_path,"{}/label.csv".format(dataset_name)))
         user_final = list(labels['id'])  # user list with label
         user_f = user_f[user_f['id'].isin(user_final)]  # Filter users with label
 

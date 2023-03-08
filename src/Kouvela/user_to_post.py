@@ -22,18 +22,20 @@ def main(argv):
 
 if __name__ == '__main__':
     dataset_name = main(sys.argv)
-    if not os.path.exists('./{}'.format(dataset_name)):
-        os.mkdir('./{}'.format(dataset_name))
-    filepath = "{}/user_to_post.csv".format(dataset_name)
+    data_path = '/scratch/mt4493/bot_detection/data'
+    code_path = '/scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela'
+    if not os.path.exists(os.path.join(code_path, '{}'.format(dataset_name))):
+        os.mkdir(os.path.join(code_path, '{}'.format(dataset_name)))
+    filepath = os.path.join(code_path,"{}/user_to_post.csv".format(dataset_name))
     with open(filepath, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(['id', 'post'])
 
     start = time.time()
-    labels = pd.read_csv("./datasets/{}/label.csv".format(dataset_name))
+    labels = pd.read_csv(os.path.join(data_path,"{}/label.csv".format(dataset_name)))
     user_final = list(labels['id']) # user list with label
 
-    df = pd.read_csv("./datasets/{}/edge.csv".format(dataset_name))
+    df = pd.read_csv(os.path.join(data_path, "{}/edge.csv".format(dataset_name)))
     df = df[df['relation'] == 'post']
     df = df[df['source_id'].isin(user_final)] # Filter users with label
     df.sort_values(by="source_id", axis=0, ascending=True, inplace=True, ignore_index=True)

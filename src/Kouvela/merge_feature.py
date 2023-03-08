@@ -44,7 +44,9 @@ if __name__ == '__main__':
     start = time.time()
     dataset_name = main(sys.argv)
     val = 'id'
-    
+    data_path = '/scratch/mt4493/bot_detection/data'
+    code_path = '/scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela'
+
     uf = pd.read_csv("{}/user_feature.csv".format(dataset_name))
     uf.sort_values(by=['id'], ascending=True, inplace=True, ignore_index = True)
 
@@ -54,7 +56,7 @@ if __name__ == '__main__':
         cf = pd.read_csv("{}/content_feature.csv".format(dataset_name))
         cf.sort_values(by=['id'], ascending=True, inplace=True, ignore_index=True)
 
-    label = pd.read_csv("./datasets/{}/label.csv".format(dataset_name))
+    label = pd.read_csv(os.path.join(data_path, "{}/label.csv".format(dataset_name)))
     delt = find_del(uf, label, val)
     label = label[~label['id'].isin(delt)]
     label.sort_values(by=['id'], ascending=True, inplace=True, ignore_index=True)
@@ -63,7 +65,7 @@ if __name__ == '__main__':
     bot_human = change(bot_human)
     label['label'] = bot_human
 
-    split = pd.read_csv("./datasets/{}/split.csv".format(dataset_name))
+    split = pd.read_csv(os.path.join(data_path,"{}/split.csv".format(dataset_name)))
     dels = find_del(uf, split, val)
     split.sort_values(by=['id'], ascending=True, inplace=True, ignore_index = True)
     split = split[~split['id'].isin(dels)]

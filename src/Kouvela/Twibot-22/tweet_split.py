@@ -8,7 +8,7 @@ import pandas as pd
 
 def generate_userful(num):
     start = time.time()
-    dir_ = './datasets/Twibot-22/'
+    dir_ = '/scratch/mt4493/bot_detection/data/Twibot-22/'
     t = json.load(open(dir_ + 'tweet_{}.json'.format(num)))
     length = len(t)
     print('Read tweet_{} finish:'.format(num), time.time() - start)
