@@ -3,7 +3,7 @@
 #SBATCH --job-name=run_preprocess
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=50GB
+#SBATCH --mem=100GB
 #SBATCH --time=48:00:00
 #SBATCH --gres=gpu:0
 #SBATCH --mail-type=BEGIN
@@ -15,10 +15,10 @@ module purge
 
 cd /scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela
 
-singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
-	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
-	    /bin/bash -c "source /ext3/env.sh; python3 user_to_post.py --datasets Twibot-22"
-echo 'user_to_post done'
+#singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
+#	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
+#	    /bin/bash -c "source /ext3/env.sh; python3 user_to_post.py --datasets Twibot-22"
+#echo 'user_to_post done'
 
 singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
 	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
