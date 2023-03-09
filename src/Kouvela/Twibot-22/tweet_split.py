@@ -45,4 +45,4 @@ if __name__ == '__main__':
     for i in tqdm(range(batch)):
         begin = i * num
         tweet = final.loc[begin : begin + num - 1]
-        tweet.to_csv(os.path.join(code_path,'small_split_dataset/tweet{}.csv'.format(i), index=False))
+        tweet.to_csv(os.path.join(code_path,'Twibot-22','small_split_dataset/tweet{}.csv'.format(i), index=False))
