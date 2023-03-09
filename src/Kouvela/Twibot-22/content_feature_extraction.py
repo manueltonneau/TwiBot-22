@@ -44,13 +44,14 @@ def to_csv(header, dic, filename):
 
 if __name__ == '__main__':
     start = time.time()
-    filepath = './content_feature.csv'
-    dir_ = './small_split_dataset/tweet{}.csv'
+    code_path = '/scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela/Twibot-22'
+    filepath = os.path.join(code_path, 'content_feature.csv')
+    dir_ = os.path.join(code_path,'small_split_dataset/tweet{}.csv')
     flag = []
 
     var = locals()
     ids = locals()
-    number = len(os.listdir('./small_split_dataset'))
+    number = len(os.listdir(os.path.join(code_path,'small_split_dataset')))
     for i in range(number):
         var['t{}'.format(i)] = pd.read_csv(dir_.format(i), lineterminator="\n")
         ids['t{}_id'.format(i)] = get_all_tid(eval('t{}'.format(i)))
@@ -70,7 +71,7 @@ if __name__ == '__main__':
         writer = csv.writer(f)
         writer.writerow(the_header)
 
-    df = pd.read_csv('./user_to_post.csv')
+    df = pd.read_csv(os.path.join(code_path,'user_to_post.csv'))
     print('reading df finish', time.time()-start)
     row_num = df.shape[0]
     

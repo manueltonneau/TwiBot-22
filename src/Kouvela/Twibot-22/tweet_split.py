@@ -28,6 +28,7 @@ def generate_userful(num):
 
 if __name__ == '__main__':
     init_tweet = locals()
+    code_path = '/scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela'
     for i in range(9):
         init_tweet['t{}'.format(i)] = generate_userful(i)
 
@@ -40,8 +41,8 @@ if __name__ == '__main__':
     num = 1000000
     batch = int(len(final) / num)
 
-    os.makedirs('./small_split_dataset')
+    os.makedirs(os.path.join(code_path, 'Twibot-22', 'small_split_dataset'))
     for i in tqdm(range(batch)):
         begin = i * num
         tweet = final.loc[begin : begin + num - 1]
-        tweet.to_csv('./small_split_dataset/tweet{}.csv'.format(i), index=False)
+        tweet.to_csv(os.path.join(code_path,'small_split_dataset/tweet{}.csv'.format(i), index=False))

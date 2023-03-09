@@ -20,10 +20,10 @@ cd /scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela
 #	    /bin/bash -c "source /ext3/env.sh; python3 user_to_post.py --datasets Twibot-22"
 #echo 'user_to_post done'
 
-singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
-	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
-	    /bin/bash -c "source /ext3/env.sh; python3 user_feature_extraction.py --datasets Twibot-22"
-echo 'user_feature_extraction done'
+#singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
+#	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
+#	    /bin/bash -c "source /ext3/env.sh; python3 user_feature_extraction.py --datasets Twibot-22"
+#echo 'user_feature_extraction done'
 
 cd Twibot-22
 singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \

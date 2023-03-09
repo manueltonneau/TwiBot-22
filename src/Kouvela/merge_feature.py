@@ -47,13 +47,13 @@ if __name__ == '__main__':
     data_path = '/scratch/mt4493/bot_detection/data'
     code_path = '/scratch/mt4493/bot_detection/code/TwiBot-22/src/Kouvela'
 
-    uf = pd.read_csv("{}/user_feature.csv".format(dataset_name))
+    uf = pd.read_csv(os.path.join(code_path, "{}/user_feature.csv".format(dataset_name)))
     uf.sort_values(by=['id'], ascending=True, inplace=True, ignore_index = True)
 
     cflag = False
-    if os.path.exists("{}/content_feature.csv".format(dataset_name)):
+    if os.path.exists(os.path.join(code_path,"{}/content_feature.csv".format(dataset_name))):
         cflag = True
-        cf = pd.read_csv("{}/content_feature.csv".format(dataset_name))
+        cf = pd.read_csv(os.path.join(code_path,"{}/content_feature.csv".format(dataset_name)))
         cf.sort_values(by=['id'], ascending=True, inplace=True, ignore_index=True)
 
     label = pd.read_csv(os.path.join(data_path, "{}/label.csv".format(dataset_name)))
@@ -86,7 +86,7 @@ if __name__ == '__main__':
             df = pd.concat([uf, cff, label['label'], split['split']], axis=1)
         else:
             df = pd.concat([uf, label['label'], split['split']], axis=1)
-        df.to_csv('{}/features.csv'.format(dataset_name), index=False)
+        df.to_csv(os.path.join(code_path,'{}/features.csv'.format(dataset_name)), index=False)
     else:
         print('User id do not match!!!')
      
