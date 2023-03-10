@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     os.makedirs(os.path.join(code_path, 'Twibot-22', 'small_split_dataset'))
     print('starting to save csvs')
-    for i in tqdm(range(batch)):
+    for i in range(batch):
         begin = i * num
         tweet = final.loc[begin : begin + num - 1]
         tweet.to_csv(os.path.join(code_path,'Twibot-22','small_split_dataset/tweet{}.csv'.format(i), index=False))
