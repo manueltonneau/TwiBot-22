@@ -3,6 +3,8 @@ import csv
 from tqdm import tqdm
 import time
 import os
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 
 
