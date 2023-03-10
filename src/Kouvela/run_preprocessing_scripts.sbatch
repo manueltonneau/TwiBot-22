@@ -31,15 +31,15 @@ singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.e
 	    /bin/bash -c "source /ext3/env.sh; python3 tweet_split.py"
 echo 'tweet_split done'
 
-singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
-	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
-	    /bin/bash -c "source /ext3/env.sh; python3 content_feature_extraction.py"
-echo 'content_feature_extraction done'
-
-cd ..
-
-singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
-	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
-	    /bin/bash -c "source /ext3/env.sh; python3 merge_feature.py --datasets Twibot-22"
-echo 'merge_feature done'
+#singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
+#	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
+#	    /bin/bash -c "source /ext3/env.sh; python3 content_feature_extraction.py"
+#echo 'content_feature_extraction done'
+#
+#cd ..
+#
+#singularity exec --overlay /scratch/mt4493/just_another_day/singularity/tweepy.ext3:ro \
+#	    /scratch/work/public/singularity/cuda11.1-cudnn8-devel-ubuntu18.04.sif \
+#	    /bin/bash -c "source /ext3/env.sh; python3 merge_feature.py --datasets Twibot-22"
+#echo 'merge_feature done'
 
